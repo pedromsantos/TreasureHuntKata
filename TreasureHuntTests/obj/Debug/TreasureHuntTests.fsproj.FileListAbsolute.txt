@@ -1,0 +1,12 @@
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\bin\Debug\TreasureHuntTests.XML
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\bin\Debug\TreasureHuntTests.dll
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\bin\Debug\TreasureHuntTests.pdb
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\bin\Debug\FSharp.Core.dll
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\bin\Debug\nunit.framework.dll
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\bin\Debug\Unquote.dll
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\bin\Debug\FSharp.Core.xml
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\bin\Debug\nunit.framework.xml
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\bin\Debug\Unquote.xml
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\obj\Debug\TreasureHuntTests.dll
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\obj\Debug\TreasureHuntTests.pdb
+C:\Users\pedro.santos\src\TreasureHunt\TreasureHuntTests\bin\Debug\TreasureHuntTests.dll.config
