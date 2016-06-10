@@ -33,8 +33,7 @@
         | Empty, Pick -> -1
         | Treasure , Pick -> 10
         | Wall, _ -> -5
-        | _ , StayPut -> 0
-        | _, North | _, South | _, East | _, West -> 0
+        | _ , _ -> 0
 
     let outcome action situation =
         {
