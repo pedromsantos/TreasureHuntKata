@@ -46,21 +46,7 @@
         test <@ fitness Empty West  = 0 @>
 
     [<Test>]
-    let ``Move bounces back against a wall`` () =
-        let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
-        let samePosition = fst currentSituation.current
-
-        test <@ (outcomeAfterAction North currentSituation).nextPosition = samePosition @>
-
-    [<Test>]
-    let ``Move ends in wall fitness -5`` () =
-        let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
-        let samePosition = fst currentSituation.current
-
-        test <@ (outcomeAfterAction North currentSituation).fitness = -5 @>
-
-    [<Test>]
-    let ``Move return new position from situation`` () =
+    let ``Move returns new position from situation`` () =
         let situation = newSituation (Position(1,1)) Empty Empty Empty Empty Empty
         let currentPosition = fst situation.current 
         let northPosition = fst situation.north 
@@ -74,3 +60,17 @@
         test <@ (outcomeAfterAction South situation).nextPosition = southPosition @>
         test <@ (outcomeAfterAction West situation).nextPosition = westPosition @>
         test <@ (outcomeAfterAction East situation).nextPosition = eastPosition @>
+        
+    [<Test>]
+    let ``Move bounces back against a wall`` () =
+        let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
+        let samePosition = fst currentSituation.current
+
+        test <@ (outcomeAfterAction North currentSituation).nextPosition = samePosition @>
+
+    [<Test>]
+    let ``Move ends in wall fitness -5`` () =
+        let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
+        let samePosition = fst currentSituation.current
+
+        test <@ (outcomeAfterAction North currentSituation).fitness = -5 @>
