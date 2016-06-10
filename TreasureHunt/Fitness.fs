@@ -19,8 +19,8 @@
 
     let private contentForSite site = snd site
 
-    let calculateFitness site action = 
-        match site, action with
+    let calculateFitness content action = 
+        match content, action with
         | Wall, _ -> -5
         | _ , StayPut -> 0
         | _, North | _, South | _, East | _, West -> 0
@@ -37,6 +37,7 @@
 
     let nextPositionForSituation action situation =
         let siteContentAfterAction = situation |> siteForAction action |> contentForSite
+        
         match siteContentAfterAction with
         | Wall -> fst situation.current
         | _ -> nextPosition action (fst situation.current)
