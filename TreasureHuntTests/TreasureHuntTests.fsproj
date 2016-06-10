@@ -54,6 +54,8 @@
     <Compile Include="AssemblyInfo.fs" />
     <Content Include="paket.references" />
     <Compile Include="FitnessTests.fs" />
+    <Compile Include="GridTests.fs" />
+    <Compile Include="DomainTests.fs" />
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>

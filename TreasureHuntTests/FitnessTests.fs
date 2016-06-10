@@ -4,14 +4,6 @@
     open Domain
     open Fitness
 
-    let move action currentPosition =
-        match action, currentPosition with
-        | North, Position(x,y) -> Position(x, y - 1)
-        | South, Position(x,y) -> Position(x, y + 1)
-        | West, Position(x,y) -> Position(x - 1, y)
-        | East, Position(x,y) -> Position(x + 1, y)
-        | _ -> currentPosition
-
     let newSituation 
         position currentContent northContent southContent westContent eastContent = 
         {

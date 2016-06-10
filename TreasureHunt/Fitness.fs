@@ -1,10 +1,6 @@
 ﻿module Fitness    
     open Domain
 
-    let private siteContent site = snd site
-    let private sitePosition site = fst site
-    let private currentPosition situation = sitePosition situation.current
-
     let private siteAfterAction action situation =
         match action with
         | North -> situation.north
