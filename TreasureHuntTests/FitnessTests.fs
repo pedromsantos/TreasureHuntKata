@@ -1,6 +1,7 @@
 ﻿module FitnessTests
     open NUnit.Framework
     open Swensen.Unquote
+    open Domain
     open Fitness
 
     let move action currentPosition =

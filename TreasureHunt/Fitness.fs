@@ -1,15 +1,8 @@
 ﻿module Fitness    
-    type Position = Position of int * int
-    type Content = Empty | Treasure | Wall
-    type Site = Position * Content 
-    type Situation = {current:Site; north:Site; south:Site; west:Site; east:Site}
-    type ActionOutcome = {fitness:int; nextPosition:Position}
-    type Action = Pick | StayPut | North | South | East | West
+    open Domain
 
     let private siteContent site = snd site
-
     let private sitePosition site = fst site
-
     let private currentPosition situation = sitePosition situation.current
 
     let private siteAfterAction action situation =
