@@ -1,0 +1,7 @@
+source https://www.nuget.org/api/v2/
+framework >= net452
+
+nuget FAKE >= 4.25.4
+nuget NUnit 2.6.4
+nuget Unquote 3.1.1
+nuget NUnit.Runners 2.6.4

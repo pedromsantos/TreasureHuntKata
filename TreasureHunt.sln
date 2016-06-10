@@ -3,6 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".paket", ".paket", "{BF6F70FA-64F1-4CE3-8520-A40C51004738}"
+	ProjectSection(SolutionItems) = preProject
+		paket.dependencies = paket.dependencies
+	EndProjectSection
+EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TreasureHunt", "TreasureHunt\TreasureHunt.fsproj", "{D78720F8-1902-4E51-B19A-7BB54E1C8E96}"
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TreasureHuntTests", "TreasureHuntTests\TreasureHuntTests.fsproj", "{E2938D25-C1B9-49FC-9E43-1C0544E5075F}"
