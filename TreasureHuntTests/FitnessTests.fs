@@ -54,23 +54,23 @@
         let westPosition = fst situation.west
         let eastPosition = fst situation.east 
         
-        test <@ (outcomeAfterAction StayPut situation).nextPosition = currentPosition @>
-        test <@ (outcomeAfterAction Pick situation).nextPosition = currentPosition @>
-        test <@ (outcomeAfterAction North situation).nextPosition = northPosition @>
-        test <@ (outcomeAfterAction South situation).nextPosition = southPosition @>
-        test <@ (outcomeAfterAction West situation).nextPosition = westPosition @>
-        test <@ (outcomeAfterAction East situation).nextPosition = eastPosition @>
+        test <@ (outcome StayPut situation).nextPosition = currentPosition @>
+        test <@ (outcome Pick situation).nextPosition = currentPosition @>
+        test <@ (outcome North situation).nextPosition = northPosition @>
+        test <@ (outcome South situation).nextPosition = southPosition @>
+        test <@ (outcome West situation).nextPosition = westPosition @>
+        test <@ (outcome East situation).nextPosition = eastPosition @>
 
     [<Test>]
     let ``Move bounces back against a wall`` () =
         let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
         let samePosition = fst currentSituation.current
 
-        test <@ (outcomeAfterAction North currentSituation).nextPosition = samePosition @>
+        test <@ (outcome North currentSituation).nextPosition = samePosition @>
 
     [<Test>]
     let ``Move hits wall fitness -5`` () =
         let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
         let samePosition = fst currentSituation.current
 
-        test <@ (outcomeAfterAction North currentSituation).fitness = -5 @>
+        test <@ (outcome North currentSituation).fitness = -5 @>
