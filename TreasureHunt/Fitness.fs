@@ -6,6 +6,12 @@
     type Site = Position * Content 
     type Situation = {current:Site; north:Site; south:Site; west:Site; east:Site}
 
+    let private siteContent site = snd site
+
+    let private sitePosition site = fst site
+
+    let private currentPosition situation = sitePosition situation.current
+
     let private siteAfterAction action situation =
         match action with
         | North -> situation.north
@@ -17,13 +23,6 @@
     let private positionAfterAction action situation = 
         fst (siteAfterAction action situation)
 
-    let private siteContent site = snd site
-
-    let private sitePosition site = fst site
-
-    let private situationPosition situation = 
-        sitePosition situation.current
-
     let fitness content action = 
         match content, action with
         | Wall, _ -> -5
@@ -34,12 +33,11 @@
 
     let outcomeAfterAction action situation =
         let contentAfterAction = situation |> siteAfterAction action |> siteContent
-        let currentPosition = situationPosition situation
         
         {
             fitness = fitness contentAfterAction action
             nextPosition = 
                 match contentAfterAction with
-                | Wall -> currentPosition
+                | Wall -> currentPosition situation
                 | _ -> positionAfterAction action situation
         }
