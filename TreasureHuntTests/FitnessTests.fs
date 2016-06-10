@@ -46,10 +46,6 @@
         test <@ fitness Empty West  = 0 @>
 
     [<Test>]
-    let ``Perform stay put action does not change current position`` () =
-        test <@ nextPosition StayPut (Position(0,0)) = Position(0,0) @>
-
-    [<Test>]
     let ``Move bounces back against a wall`` () =
         let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
         let samePosition = fst currentSituation.current
@@ -65,13 +61,16 @@
 
     [<Test>]
     let ``Move return new position from situation`` () =
-        let currentSituation = newSituation (Position(1,1)) Empty Empty Empty Empty Empty
-        let northPosition = fst currentSituation.north 
-        let southPosition = fst currentSituation.south 
-        let westPosition = fst currentSituation.west
-        let eastPosition = fst currentSituation.east 
+        let situation = newSituation (Position(1,1)) Empty Empty Empty Empty Empty
+        let currentPosition = fst situation.current 
+        let northPosition = fst situation.north 
+        let southPosition = fst situation.south 
+        let westPosition = fst situation.west
+        let eastPosition = fst situation.east 
         
-        test <@ (outcomeAfterAction North currentSituation).nextPosition = northPosition @>
-        test <@ (outcomeAfterAction South currentSituation).nextPosition = southPosition @>
-        test <@ (outcomeAfterAction West currentSituation).nextPosition = westPosition @>
-        test <@ (outcomeAfterAction East currentSituation).nextPosition = eastPosition @>
+        test <@ (outcomeAfterAction StayPut situation).nextPosition = currentPosition @>
+        test <@ (outcomeAfterAction Pick situation).nextPosition = currentPosition @>
+        test <@ (outcomeAfterAction North situation).nextPosition = northPosition @>
+        test <@ (outcomeAfterAction South situation).nextPosition = southPosition @>
+        test <@ (outcomeAfterAction West situation).nextPosition = westPosition @>
+        test <@ (outcomeAfterAction East situation).nextPosition = eastPosition @>
