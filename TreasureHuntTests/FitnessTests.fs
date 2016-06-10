@@ -63,14 +63,14 @@
 
     [<Test>]
     let ``Move bounces back against a wall`` () =
-        let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
-        let samePosition = fst currentSituation.current
+        let situation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
+        let samePosition = fst situation.current
 
-        test <@ (outcome North currentSituation).nextPosition = samePosition @>
+        test <@ (outcome North situation).nextPosition = samePosition @>
 
     [<Test>]
     let ``Move hits wall fitness -5`` () =
-        let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
-        let samePosition = fst currentSituation.current
+        let situation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
+        let samePosition = fst situation.current
 
-        test <@ (outcome North currentSituation).fitness = -5 @>
+        test <@ (outcome North situation).fitness = -5 @>
