@@ -1,0 +1,2 @@
+# TreasureHuntKata
+Genetic algorithm kata
