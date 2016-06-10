@@ -20,9 +20,14 @@
         | East -> situation.east
         | _ -> situation.current
 
-    let private positionAfterAction action situation = 
-        fst (siteAfterAction action situation)
+    let private contentAfterAction action situation = 
+        situation |> siteAfterAction action |> siteContent
 
+    let private positionAfterAction action situation = 
+        match contentAfterAction action situation with
+        | Wall -> currentPosition situation
+        | _ -> fst (siteAfterAction action situation)
+        
     let fitness content action = 
         match content, action with
         | Empty, Pick -> -1
@@ -32,12 +37,7 @@
         | _, North | _, South | _, East | _, West -> 0
 
     let outcome action situation =
-        let contentAfterAction = situation |> siteAfterAction action |> siteContent
-        
         {
-            fitness = fitness contentAfterAction action
-            nextPosition = 
-                match contentAfterAction with
-                | Wall -> currentPosition situation
-                | _ -> positionAfterAction action situation
+            fitness = fitness (contentAfterAction action situation) action
+            nextPosition = positionAfterAction action situation
         }
