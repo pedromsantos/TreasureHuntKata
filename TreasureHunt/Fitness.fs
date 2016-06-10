@@ -2,7 +2,7 @@
     type Content = Empty | Treasure | Wall
     type Action = Pick | StayPut | North | South | East | West
     type Position = Position of int * int
-    type SiteAction = {fitness:int; nextPosition:Position}
+    type ActionOutcome = {fitness:int; nextPosition:Position}
     type Site = Position * Content 
     type Situation = {current:Site; north:Site; south:Site; west:Site; east:Site}
 
@@ -18,6 +18,11 @@
         fst (siteForAction action situation)
 
     let private contentForSite site = snd site
+
+    let private positionForSite site = fst site
+
+    let private positionForSituation situation = 
+        positionForSite situation.current
 
     let calculateFitness content action = 
         match content, action with
@@ -36,8 +41,13 @@
         | _ -> currentPosition
 
     let nextPositionForSituation action situation =
-        let siteContentAfterAction = situation |> siteForAction action |> contentForSite
+        let contentAfterAction = situation |> siteForAction action |> contentForSite
+        let currentPosition = positionForSituation situation
         
-        match siteContentAfterAction with
-        | Wall -> fst situation.current
-        | _ -> nextPosition action (fst situation.current)
+        {
+            fitness = calculateFitness contentAfterAction action
+            nextPosition = 
+                match contentAfterAction with
+                | Wall -> currentPosition
+                | _ -> nextPosition action currentPosition
+        }

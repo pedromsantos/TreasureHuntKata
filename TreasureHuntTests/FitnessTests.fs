@@ -54,11 +54,18 @@
         let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
         let samePosition = positionForAction StayPut currentSituation
 
-        test <@ (nextPositionForSituation North currentSituation) = samePosition @>
+        test <@ (nextPositionForSituation North currentSituation).nextPosition = samePosition @>
+
+    [<Test>]
+    let ``Perform move action ends in wall fitness = -5`` () =
+        let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
+        let samePosition = positionForAction StayPut currentSituation
+
+        test <@ (nextPositionForSituation North currentSituation).fitness = -5 @>
 
     [<Test>]
     let ``Perform move action return new position from situation`` () =
         let currentSituation = newSituation (Position(1,1)) Empty Empty Empty Empty Empty
         let northPosition = positionForAction North currentSituation 
         
-        test <@ (nextPositionForSituation North currentSituation) = northPosition @>
+        test <@ (nextPositionForSituation North currentSituation).nextPosition = northPosition @>
