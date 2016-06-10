@@ -3,7 +3,8 @@
     open Swensen.Unquote
     open Fitness
 
-    let newSituation position currentContent northContent southContent westContent eastContent= 
+    let newSituation 
+        position currentContent northContent southContent westContent eastContent = 
         {
             current = (position, currentContent)
             north = (position |> nextPosition North, northContent)
@@ -14,30 +15,30 @@
 
     [<Test>]
     let ``Should score -1 if current position is empty and action is pick``() =
-        test <@ calculateFitness Empty Pick = -1 @>
+        test <@ fitness Empty Pick = -1 @>
 
     [<Test>]
     let ``Should score 10 if current position has treasure and action is pick``() =
-        test <@ calculateFitness Treasure Pick = 10 @>
+        test <@ fitness Treasure Pick = 10 @>
 
     [<Test>]
     let ``Should score -5 if current position is wall``() =
-        test <@ calculateFitness Wall Pick = -5 @>
+        test <@ fitness Wall Pick = -5 @>
 
     [<Test>]
-    let ``Should score 0 if the action is stay put on Empty or Trweasure site`` () = 
-        test <@ calculateFitness Empty StayPut = 0 @>
-        test <@ calculateFitness Treasure StayPut = 0 @>
+    let ``Should score 0 if the action is stay put on empty or treasure site`` () = 
+        test <@ fitness Empty StayPut = 0 @>
+        test <@ fitness Treasure StayPut = 0 @>
 
     [<Test>]
     let ``Should score 0 if the action is move`` () = 
-        test <@ calculateFitness Empty North = 0 @>
-        test <@ calculateFitness Empty South = 0 @>
-        test <@ calculateFitness Empty East  = 0 @>
-        test <@ calculateFitness Empty West  = 0 @>
+        test <@ fitness Empty North = 0 @>
+        test <@ fitness Empty South = 0 @>
+        test <@ fitness Empty East  = 0 @>
+        test <@ fitness Empty West  = 0 @>
 
     [<Test>]
-    let ``Perform StayPut action does not change current position`` () =
+    let ``Perform stay put action does not change current position`` () =
         test <@ nextPosition StayPut (Position(0,0)) = Position(0,0) @>
         
     [<Test>]
@@ -52,20 +53,20 @@
     [<Test>]
     let ``Perform move action bounces back against a wall`` () =
         let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
-        let samePosition = positionForAction StayPut currentSituation
+        let samePosition = positionAfterAction StayPut currentSituation
 
         test <@ (nextPositionForSituation North currentSituation).nextPosition = samePosition @>
 
     [<Test>]
     let ``Perform move action ends in wall fitness = -5`` () =
         let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
-        let samePosition = positionForAction StayPut currentSituation
+        let samePosition = positionAfterAction StayPut currentSituation
 
         test <@ (nextPositionForSituation North currentSituation).fitness = -5 @>
 
     [<Test>]
     let ``Perform move action return new position from situation`` () =
         let currentSituation = newSituation (Position(1,1)) Empty Empty Empty Empty Empty
-        let northPosition = positionForAction North currentSituation 
+        let northPosition = positionAfterAction North currentSituation 
         
         test <@ (nextPositionForSituation North currentSituation).nextPosition = northPosition @>
