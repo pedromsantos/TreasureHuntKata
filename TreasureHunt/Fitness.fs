@@ -14,7 +14,7 @@
         | East -> situation.east
         | _ -> situation.current
 
-    let positionAfterAction action situation = 
+    let private positionAfterAction action situation = 
         fst (siteAfterAction action situation)
 
     let private siteContent site = snd site
@@ -31,16 +31,8 @@
         | _, North | _, South | _, East | _, West -> 0
         | Empty, _ -> -1
         | Treasure , Pick -> 10
-    
-    let nextPosition action currentPosition =
-        match action, currentPosition with
-        | North, Position(x,y) -> Position(x, y - 1)
-        | South, Position(x,y) -> Position(x, y + 1)
-        | West, Position(x,y) -> Position(x - 1, y)
-        | East, Position(x,y) -> Position(x + 1, y)
-        | _ -> currentPosition
 
-    let nextPositionForSituation action situation =
+    let outcomeAfterAction action situation =
         let contentAfterAction = situation |> siteAfterAction action |> siteContent
         let currentPosition = situationPosition situation
         
@@ -49,5 +41,5 @@
             nextPosition = 
                 match contentAfterAction with
                 | Wall -> currentPosition
-                | _ -> nextPosition action currentPosition
+                | _ -> positionAfterAction action situation
         }

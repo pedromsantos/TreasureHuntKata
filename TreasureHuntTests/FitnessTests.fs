@@ -3,6 +3,14 @@
     open Swensen.Unquote
     open Fitness
 
+    let nextPosition action currentPosition =
+        match action, currentPosition with
+        | North, Position(x,y) -> Position(x, y - 1)
+        | South, Position(x,y) -> Position(x, y + 1)
+        | West, Position(x,y) -> Position(x - 1, y)
+        | East, Position(x,y) -> Position(x + 1, y)
+        | _ -> currentPosition
+
     let newSituation 
         position currentContent northContent southContent westContent eastContent = 
         {
@@ -40,33 +48,30 @@
     [<Test>]
     let ``Perform stay put action does not change current position`` () =
         test <@ nextPosition StayPut (Position(0,0)) = Position(0,0) @>
-        
-    [<Test>]
-    let ``Perform move action changes current position`` () =
-        test <@ nextPosition North (Position(0,1)) = Position(0,0) @>
-        test <@ nextPosition North (Position(0,2)) = Position(0,1) @>
-        test <@ nextPosition North (Position(1,2)) = Position(1,1) @>
-        test <@ nextPosition South (Position(1,2)) = Position(1,3) @>
-        test <@ nextPosition West (Position(1,1)) = Position(0,1) @>
-        test <@ nextPosition East (Position(1,1)) = Position(2,1) @>
 
     [<Test>]
-    let ``Perform move action bounces back against a wall`` () =
+    let ``Move bounces back against a wall`` () =
         let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
-        let samePosition = positionAfterAction StayPut currentSituation
+        let samePosition = fst currentSituation.current
 
-        test <@ (nextPositionForSituation North currentSituation).nextPosition = samePosition @>
+        test <@ (outcomeAfterAction North currentSituation).nextPosition = samePosition @>
 
     [<Test>]
-    let ``Perform move action ends in wall fitness = -5`` () =
+    let ``Move ends in wall fitness -5`` () =
         let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
-        let samePosition = positionAfterAction StayPut currentSituation
+        let samePosition = fst currentSituation.current
 
-        test <@ (nextPositionForSituation North currentSituation).fitness = -5 @>
+        test <@ (outcomeAfterAction North currentSituation).fitness = -5 @>
 
     [<Test>]
-    let ``Perform move action return new position from situation`` () =
+    let ``Move return new position from situation`` () =
         let currentSituation = newSituation (Position(1,1)) Empty Empty Empty Empty Empty
-        let northPosition = positionAfterAction North currentSituation 
+        let northPosition = fst currentSituation.north 
+        let southPosition = fst currentSituation.south 
+        let westPosition = fst currentSituation.west
+        let eastPosition = fst currentSituation.east 
         
-        test <@ (nextPositionForSituation North currentSituation).nextPosition = northPosition @>
+        test <@ (outcomeAfterAction North currentSituation).nextPosition = northPosition @>
+        test <@ (outcomeAfterAction South currentSituation).nextPosition = southPosition @>
+        test <@ (outcomeAfterAction West currentSituation).nextPosition = westPosition @>
+        test <@ (outcomeAfterAction East currentSituation).nextPosition = eastPosition @>
