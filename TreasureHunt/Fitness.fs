@@ -31,7 +31,7 @@
         | _ , StayPut -> 0
         | _, North | _, South | _, East | _, West -> 0
 
-    let outcomeAfterAction action situation =
+    let outcome action situation =
         let contentAfterAction = situation |> siteAfterAction action |> siteContent
         
         {
