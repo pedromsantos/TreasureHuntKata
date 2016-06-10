@@ -3,7 +3,7 @@
     open Swensen.Unquote
     open Fitness
 
-    let nextPosition action currentPosition =
+    let move action currentPosition =
         match action, currentPosition with
         | North, Position(x,y) -> Position(x, y - 1)
         | South, Position(x,y) -> Position(x, y + 1)
@@ -15,10 +15,10 @@
         position currentContent northContent southContent westContent eastContent = 
         {
             current = (position, currentContent)
-            north = (position |> nextPosition North, northContent)
-            south =(position |> nextPosition South, southContent)
-            west = (position |> nextPosition West,  westContent)
-            east = (position |> nextPosition East,  eastContent)
+            north = (position |> move North, northContent)
+            south =(position |> move South, southContent)
+            west = (position |> move West,  westContent)
+            east = (position |> move East,  eastContent)
         }
 
     [<Test>]
