@@ -9,7 +9,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>TreasureHuntTests</RootNamespace>
     <AssemblyName>TreasureHuntTests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Name>TreasureHuntTests</Name>
@@ -72,6 +72,13 @@
       <HintPath>..\packages\Unquote.3.1.1\lib\net45\Unquote.dll</HintPath>
       <Private>True</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TreasureHunt\TreasureHunt.fsproj">
+      <Name>TreasureHunt</Name>
+      <Project>{d78720f8-1902-4e51-b19a-7bb54e1c8e96}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

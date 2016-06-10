@@ -1,33 +1,16 @@
 ﻿module FitnessTests
     open NUnit.Framework
     open Swensen.Unquote
-  
-    type Site = Empty | Treasure | Wall
-    type Action = Pick | StayPut | North | South | East | West
-    type Position = Position of int * int
-    type SiteAction = {fitness:int; nextPosition:Position}
+    open Fitness
 
-    let calculateFitness site action = 
-        match site, action with
-        | Wall, _ -> -5
-        | _ , StayPut -> 0
-        | _, North | _, South | _, East | _, West -> 0
-        | Empty, _ -> -1
-        | Treasure , Pick -> 10
-    
-    let nextPosition action currentPosition =
-        match action, currentPosition with
-        | North, Position(x,y) -> Position(x, y - 1)
-        | South, Position(x,y) -> Position(x, y + 1)
-        | West, Position(x,y) -> Position(x - 1, y)
-        | East, Position(x,y) -> Position(x + 1, y)
-        | _ -> currentPosition
-
-    let performAction site action currentPosition =
-            {
-                fitness = calculateFitness site action;
-                nextPosition = nextPosition action currentPosition
-            }
+    let newSituation position currentContent northContent southContent westContent eastContent= 
+        {
+            current = (position, currentContent)
+            north = (position |> nextPosition North, northContent)
+            south =(position |> nextPosition South, southContent)
+            west = (position |> nextPosition West,  westContent)
+            east = (position |> nextPosition East,  eastContent)
+        }
 
     [<Test>]
     let ``Should score -1 if current position is empty and action is pick``() =
@@ -56,9 +39,18 @@
     [<Test>]
     let ``Perform StayPut action does not change current position`` () =
         test <@ nextPosition StayPut (Position(0,0)) = Position(0,0) @>
+        
+    [<Test>]
+    let ``Perform move action changes current position`` () =
         test <@ nextPosition North (Position(0,1)) = Position(0,0) @>
         test <@ nextPosition North (Position(0,2)) = Position(0,1) @>
         test <@ nextPosition North (Position(1,2)) = Position(1,1) @>
         test <@ nextPosition South (Position(1,2)) = Position(1,3) @>
         test <@ nextPosition West (Position(1,1)) = Position(0,1) @>
         test <@ nextPosition East (Position(1,1)) = Position(2,1) @>
+
+    [<Test>]
+    let ``Perform move action bounces back against a wall`` () =
+        let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
+
+        test <@ (nextPositionForSituation North currentSituation) = Position(1,1) @>
