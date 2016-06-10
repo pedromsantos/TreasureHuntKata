@@ -14,6 +14,9 @@
         | East -> situation.east
         | _ -> situation.current
 
+    let positionForAction action situation = 
+        fst (siteForAction action situation)
+
     let private contentForSite site = snd site
 
     let calculateFitness site action = 

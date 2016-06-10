@@ -52,5 +52,13 @@
     [<Test>]
     let ``Perform move action bounces back against a wall`` () =
         let currentSituation = newSituation (Position(1,1)) Empty Wall Empty Empty Empty
+        let samePosition = positionForAction StayPut currentSituation
 
-        test <@ (nextPositionForSituation North currentSituation) = Position(1,1) @>
+        test <@ (nextPositionForSituation North currentSituation) = samePosition @>
+
+    [<Test>]
+    let ``Perform move action return new position from situation`` () =
+        let currentSituation = newSituation (Position(1,1)) Empty Empty Empty Empty Empty
+        let northPosition = positionForAction North currentSituation 
+        
+        test <@ (nextPositionForSituation North currentSituation) = northPosition @>
