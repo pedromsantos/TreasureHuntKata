@@ -1,7 +1,0 @@
-C:\Users\pedro.santos\src\TreasureHunt\TreasureHunt\bin\Debug\TreasureHunt.XML
-C:\Users\pedro.santos\src\TreasureHunt\TreasureHunt\bin\Debug\TreasureHunt.dll
-C:\Users\pedro.santos\src\TreasureHunt\TreasureHunt\bin\Debug\TreasureHunt.pdb
-C:\Users\pedro.santos\src\TreasureHunt\TreasureHunt\bin\Debug\FSharp.Core.dll
-C:\Users\pedro.santos\src\TreasureHunt\TreasureHunt\bin\Debug\FSharp.Core.xml
-C:\Users\pedro.santos\src\TreasureHunt\TreasureHunt\obj\Debug\TreasureHunt.dll
-C:\Users\pedro.santos\src\TreasureHunt\TreasureHunt\obj\Debug\TreasureHunt.pdb
