@@ -11,12 +11,7 @@ module GridTests
             | Position(r,_) when r = row -> true
             | _ -> false)
     
-    let sitesForColumn column grid = 
-        grid
-        |> Seq.filter (fun (p,_) -> 
-            match p with 
-            | Position(_,c) when c = column -> true
-            | _ -> false)
+    
 
     [<Test>]
     let ``Should create grid 10x10``() =
@@ -35,7 +30,14 @@ module GridTests
                 |> sitesForRow 9 
                 |> Seq.filter (fun (_,c) -> c = Wall ) 
                 |> Seq.length = 10 @>
-
+    
+    let sitesForColumn column grid = 
+        grid
+        |> Seq.filter (fun (p,_) -> 
+            match p with 
+            | Position(_,c) when c = column -> true
+            | _ -> false)
+    
     [<Test>]
     let ``Grid should contain walls on first column``() =
         test <@ create 
@@ -52,7 +54,8 @@ module GridTests
 
     [<Test>]
     let ``Grid should contain some treasures``() =
-        test <@ create
+        let grid = create
+        test <@ grid
                 |> Seq.filter (fun (_,c) -> c = Treasure)
                 |> Seq.length > 0 @>
 

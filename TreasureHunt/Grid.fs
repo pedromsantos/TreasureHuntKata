@@ -3,27 +3,31 @@ module Grid
 
     let private size = 10
     let private treasureRandomTop = size * 10
-    let private treasureThresholdChance = 50
+    let private treasureThresholdChance = 60
     let private rand = System.Random()
 
-    let randomizeContent = 
+    let private TreasureOrEmpty = 
         let number = rand.Next(1, treasureRandomTop)
         match number with
-        | n when n >= treasureThresholdChance -> Treasure
+        | n when n < treasureThresholdChance -> Treasure
         | _ -> Empty
 
+    let private isWall line = 
+        line = 0 || line = size - 1
+
     let private contentForPosition row column = 
-        if row = 0 || row = size - 1 || column = 0 || column = size - 1 then
-            Position(row, column), Wall
-        else
-            Position(row, column), randomizeContent
+        let content =
+            if isWall row || isWall column 
+            then Wall
+            else TreasureOrEmpty
+        Position(row, column), content
 
     let create = 
-        seq { for row in 0 .. size - 1 do
+        seq { 
+            for row in 0 .. size - 1 do
                 for column in 0 .. size - 1 do
-                    yield
-                        contentForPosition row column
-            }
+                    yield contentForPosition row column
+        }
 
     let situation position grid =
         {
