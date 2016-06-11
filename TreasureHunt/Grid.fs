@@ -1,5 +1,7 @@
 module Grid
     open Domain
+    
+    type Grid = Site seq
 
     let private size = 10
     let private treasureRandomTop = size * 10
@@ -29,11 +31,14 @@ module Grid
                     yield contentForPosition row column
         }
 
+    let findSiteBy position grid =
+        grid |> Seq.find (fun site -> positionOf site = position)
+
     let situation position grid =
         {
-            current = grid |> Seq.find (fun site -> sitePosition site = position); 
-            north = grid |> Seq.find (fun site -> sitePosition site = move North position); 
-            south = grid |> Seq.find (fun site -> sitePosition site = move South position);
-            west = grid |> Seq.find (fun site -> sitePosition site = move West position);
-            east = grid |> Seq.find (fun site -> sitePosition site = move East position);
+            current = grid |> findSiteBy position; 
+            north   = grid |> findSiteBy (move North position); 
+            south   = grid |> findSiteBy (move South position);
+            west    = grid |> findSiteBy (move West  position);
+            east    = grid |> findSiteBy (move East  position);
         }
