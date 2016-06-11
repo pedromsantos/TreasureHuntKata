@@ -54,8 +54,7 @@ module GridTests
 
     [<Test>]
     let ``Grid should contain some treasures``() =
-        let grid = create
-        test <@ grid
+        test <@ create
                 |> Seq.filter (fun (_,c) -> c = Treasure)
                 |> Seq.length > 0 @>
 
