@@ -58,7 +58,7 @@ module GridTests
 
     [<Test>]
     let ``Should create situation from grid position``() =
-        let situation = create |> situationForPosition (Position(1,1))
+        let situation = create |> situation (Position(1,1))
         
         test <@ fst situation.current = Position(1,1) @>
         test <@ fst situation.north = Position(1,0) @>

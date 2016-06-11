@@ -24,7 +24,7 @@ module Grid
                         contentForPosition row column
             }
 
-    let situationForPosition position grid =
+    let situation position grid =
         {
             current = grid |> Seq.find (fun site -> sitePosition site = position); 
             north = grid |> Seq.find (fun site -> sitePosition site = move North position); 
