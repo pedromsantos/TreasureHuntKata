@@ -3,15 +3,16 @@ module Grid
 
     let private size = 10
     let private treasureRandomTop = size * 10
+    let private treasureThresholdChance = 70
     let private rand = System.Random()
 
     let private treasureChance number =
         match number with
-        | n when n >= 70 -> Treasure
+        | n when n >= treasureThresholdChance -> Treasure
         | _ -> Empty
 
     let private contentForPosition row column = 
-        if row = 0 || row = size - 1 || column = 0 || column = 9 then
+        if row = 0 || row = size - 1 || column = 0 || column = size - 1 then
             Position(row, column), Wall
         else
             Position(row, column), (treasureChance (rand.Next(1, treasureRandomTop)))
