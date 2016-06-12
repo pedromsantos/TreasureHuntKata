@@ -10,7 +10,7 @@
         | _ -> situation.current
 
     let private contentAfterAction action situation = 
-        situation |> siteAfterAction action |> siteContent
+        situation |> siteAfterAction action |> contentOf
 
     let private positionAfterAction action situation = 
         match contentAfterAction action situation with
