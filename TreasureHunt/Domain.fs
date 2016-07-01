@@ -35,4 +35,4 @@ module Domain
                         for east in contents do
                             for west in contents do
                                 yield {Current=current; North=north; South=south; West=west; East=east}
-            }
+            } |> Seq.cache
