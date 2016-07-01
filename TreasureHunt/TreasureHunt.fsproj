@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Infrastructure.fs" />
     <Compile Include="Domain.fs" />
     <Compile Include="Fitness.fs" />
     <Compile Include="Grid.fs" />

@@ -11,8 +11,6 @@ module GridTests
             | Position(r,_) when r = row -> true
             | _ -> false)
     
-    
-
     [<Test>]
     let ``Should create grid 10x10``() =
         test <@ create |> Seq.length = 100  @>

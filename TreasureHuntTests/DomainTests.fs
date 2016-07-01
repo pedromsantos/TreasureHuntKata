@@ -11,3 +11,12 @@ module DomainTests
         test <@ move South (Position(1,2)) = Position(1,3) @>
         test <@ move West (Position(1,1)) = Position(0,1) @>
         test <@ move East (Position(1,1)) = Position(2,1) @>
+
+    [<Test>]
+    let ``Creates all startegy rows`` () =
+        test <@ createStrategyRows() |> Seq.length = 243 @>
+
+        let firstRun = createStrategyRows() |> Seq.toList
+        let secondRun = createStrategyRows() |> Seq.toList
+
+        test <@  firstRun = secondRun @>

@@ -5,7 +5,7 @@ module Grid
 
     let private size = 10
     let private maxTreasures = size * size
-    let private treasureThresholdChance = (int)((float)maxTreasures * 0.5)
+    let private treasureThresholdChance = (int)((float)maxTreasures * 0.7)
     let private rand = System.Random()
 
     let private nextRand min max =
